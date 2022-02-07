@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<List<CountriesResponse>> call, @NonNull Response<List<CountriesResponse>> response) {
 
-                countriesResponseList = response.body();
+                List<CountriesResponse> details = response.body();
+                Collections.sort(details);
+                countriesResponseList = details;;
 
                 if (countriesResponseList != null) {
                     for (CountriesResponse countriesResponse : countriesResponseList) {

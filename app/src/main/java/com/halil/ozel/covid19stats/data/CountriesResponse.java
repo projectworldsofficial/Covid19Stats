@@ -2,7 +2,7 @@ package com.halil.ozel.covid19stats.data;
 
 import java.util.Objects;
 
-public class CountriesResponse {
+public class CountriesResponse implements Comparable<CountriesResponse> {
 
     private String country;
     private String recovered;
@@ -12,7 +12,7 @@ public class CountriesResponse {
     private String active;
     private String casesPerOneMillion;
     private CountryInfo countryInfo;
-    private String deaths;
+    private int deaths;
     private int todayCases;
     private int todayDeaths;
     private String tests;
@@ -82,11 +82,11 @@ public class CountriesResponse {
         this.countryInfo = countryInfo;
     }
 
-    public String getDeaths() {
+    public int getDeaths() {
         return deaths;
     }
 
-    public void setDeaths(String deaths) {
+    public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
 
@@ -119,7 +119,7 @@ public class CountriesResponse {
         if (this == o) return true;
         if (!(o instanceof CountriesResponse)) return false;
         CountriesResponse that = (CountriesResponse) o;
-        return getTodayCases() == that.getTodayCases() && getTodayDeaths() == that.getTodayDeaths() && getCountry().equals(that.getCountry()) && getRecovered().equals(that.getRecovered()) && getCases().equals(that.getCases()) && getCritical().equals(that.getCritical()) && getDeathsPerOneMillion().equals(that.getDeathsPerOneMillion()) && getActive().equals(that.getActive()) && getCasesPerOneMillion().equals(that.getCasesPerOneMillion()) && getCountryInfo().equals(that.getCountryInfo()) && getDeaths().equals(that.getDeaths()) && getTests().equals(that.getTests());
+        return getTodayCases() == that.getTodayCases() && getTodayDeaths() == that.getTodayDeaths() && getCountry().equals(that.getCountry()) && getRecovered().equals(that.getRecovered()) && getCases().equals(that.getCases()) && getCritical().equals(that.getCritical()) && getDeathsPerOneMillion().equals(that.getDeathsPerOneMillion()) && getActive().equals(that.getActive()) && getCasesPerOneMillion().equals(that.getCasesPerOneMillion()) && getCountryInfo().equals(that.getCountryInfo()) && getDeaths() == that.getDeaths() && getTests().equals(that.getTests());
     }
 
     @Override
@@ -143,5 +143,10 @@ public class CountriesResponse {
                 ", todayDeaths=" + todayDeaths +
                 ", tests='" + tests + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(CountriesResponse countriesResponse) {
+        return countriesResponse.deaths - deaths;
     }
 }
