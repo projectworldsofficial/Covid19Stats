@@ -11,8 +11,8 @@ public class CountriesResponse {
     private String casesPerOneMillion;
     private CountryInfo countryInfo;
     private String deaths;
-    private String todayCases;
-    private String todayDeaths;
+    private int todayCases;
+    private int todayDeaths;
     private String tests;
 
 
@@ -88,19 +88,19 @@ public class CountriesResponse {
         this.deaths = deaths;
     }
 
-    public String getTodayCases() {
+    public int getTodayCases() {
         return todayCases;
     }
 
-    public void setTodayCases(String todayCases) {
+    public void setTodayCases(int todayCases) {
         this.todayCases = todayCases;
     }
 
-    public String getTodayDeaths() {
+    public int getTodayDeaths() {
         return todayDeaths;
     }
 
-    public void setTodayDeaths(String todayDeaths) {
+    public void setTodayDeaths(int todayDeaths) {
         this.todayDeaths = todayDeaths;
     }
 

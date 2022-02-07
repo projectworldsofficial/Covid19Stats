@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.halil.ozel.covid19stats.R;
+import com.halil.ozel.covid19stats.common.Constants;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-
 
     ImageView ivCountryPoster;
     TextView tvCountryName, tvTodayCases, tvTodayDeath, tvTotalTests, tvTotalCases, tvTotalDeaths, tvTotalRecovered;
@@ -31,13 +31,13 @@ public class DetailActivity extends AppCompatActivity {
         ivCountryPoster = findViewById(R.id.ivCountryPoster);
 
 
-        String countryName = getIntent().getStringExtra("country");
-        String todayCase = getIntent().getStringExtra("todayCase");
-        String todayDeath = getIntent().getStringExtra("todayDeath");
-        String totalCases = getIntent().getStringExtra("cases");
-        String totalDeaths = getIntent().getStringExtra("deaths");
-        String totalTests = getIntent().getStringExtra("tests");
-        String totalRecovered = getIntent().getStringExtra("recovered");
+        String countryName = getIntent().getStringExtra(Constants.COUNTRY);
+        String todayCase = getIntent().getStringExtra(Constants.TODAYS_CASES);
+        String todayDeath = String.valueOf(getIntent().getIntExtra(Constants.TODAYS_DEATHS, 0));
+        String totalCases = getIntent().getStringExtra(Constants.TOTAL_CASES);
+        String totalDeaths = String.valueOf(getIntent().getIntExtra(Constants.TOTAL_DEATHS, 0));
+        String totalTests = getIntent().getStringExtra(Constants.TOTAL_TESTS);
+        String totalRecovered = getIntent().getStringExtra(Constants.TOTAL_RECOVERED);
 
         tvCountryName.setText(countryName);
         tvTodayCases.setText(todayCase);
@@ -50,9 +50,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         Picasso.with(getApplicationContext()).
-                load(getIntent().getStringExtra("flag"))
+                load(getIntent().getStringExtra(Constants.FLAG))
                 .into(ivCountryPoster);
-
-
     }
 }
