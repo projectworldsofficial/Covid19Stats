@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.halil.ozel.covid19stats.R;
 import com.halil.ozel.covid19stats.api.CoronaApi;
 import com.halil.ozel.covid19stats.api.CoronaService;
+import com.halil.ozel.covid19stats.common.Constants;
 import com.halil.ozel.covid19stats.data.CountriesResponse;
 import com.halil.ozel.covid19stats.ui.activity.DetailActivity;
 import com.squareup.picasso.Picasso;
@@ -66,7 +67,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryH
 
                     CountriesResponse oldMovie = countriesList.get(newItemPosition);
 
-                    return newMovie.getCountry() == oldMovie.getCountry();
+                    return newMovie.getCountry().equals(oldMovie.getCountry());
                 }
             });
             this.countriesList = countriesList;
@@ -112,14 +113,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryH
                         Intent intent = new Intent(view.getContext(), DetailActivity.class);
 
                         if (response.body() != null) {
-                            intent.putExtra("country", response.body().getCountry());
-                            intent.putExtra("todayCase", response.body().getTodayCases());
-                            intent.putExtra("todayDeath", response.body().getTodayDeaths());
-                            intent.putExtra("flag", response.body().getCountryInfo().getFlag());
-                            intent.putExtra("cases", response.body().getCases());
-                            intent.putExtra("deaths", response.body().getDeaths());
-                            intent.putExtra("tests", response.body().getTests());
-                            intent.putExtra("recovered", response.body().getRecovered());
+                            intent.putExtra(Constants.COUNTRY, response.body().getCountry());
+                            intent.putExtra(Constants.TODAYS_CASES, response.body().getTodayCases());
+                            intent.putExtra(Constants.TODAYS_DEATHS, response.body().getTodayDeaths());
+                            intent.putExtra(Constants.FLAG, response.body().getCountryInfo().getFlag());
+                            intent.putExtra(Constants.TOTAL_CASES, response.body().getCases());
+                            intent.putExtra(Constants.TOTAL_DEATHS, response.body().getDeaths());
+                            intent.putExtra(Constants.TOTAL_TESTS, response.body().getTests());
+                            intent.putExtra(Constants.TOTAL_RECOVERED, response.body().getRecovered());
                         }
 
 
@@ -183,7 +184,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.CountryH
     }
 
 
-    public class CountryHolder extends RecyclerView.ViewHolder {
+    public static class CountryHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView countryTitle;
         TextView countryName;

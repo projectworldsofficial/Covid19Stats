@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.halil.ozel.covid19stats.data.CountriesResponse;
 import com.halil.ozel.covid19stats.ui.adapter.CountryAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private SearchView searchView;
-    private RecyclerView recyclerView;
     private CountryAdapter countryAdapter;
     private List<CountriesResponse> countriesResponseList;
 
@@ -40,24 +41,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        recyclerView = findViewById(R.id.rvCountry);
+        RecyclerView recyclerView = findViewById(R.id.rvCountry);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         countryAdapter = new CountryAdapter();
         recyclerView.setAdapter(countryAdapter);
 
         countriesResponseList = new ArrayList<>();
 
-        CoronaService coronaService =
-                CoronaApi.getRetrofitInstance().create(CoronaService.class);
+        CoronaService coronaService = CoronaApi.getRetrofitInstance().create(CoronaService.class);
 
 
         Call<List<CountriesResponse>> call = coronaService.getCountries();
         call.enqueue(new Callback<List<CountriesResponse>>() {
             @Override
-            public void onResponse(Call<List<CountriesResponse>> call, Response<List<CountriesResponse>> response) {
+            public void onResponse(@NonNull Call<List<CountriesResponse>> call, @NonNull Response<List<CountriesResponse>> response) {
 
-                countriesResponseList = response.body();
-
+                List<CountriesResponse> details = response.body();
+                Collections.sort(details);
+                countriesResponseList = details;;
 
                 if (countriesResponseList != null) {
                     for (CountriesResponse countriesResponse : countriesResponseList) {
@@ -65,12 +66,8 @@ public class MainActivity extends AppCompatActivity {
                         System.out.println("Country Name : " + countriesResponse.getCountry() + " - Death Count : " + countriesResponse.getDeaths() + "\n");
 
                         countryAdapter.setCountryList(getApplicationContext(), countriesResponseList);
-
-
                     }
                 }
-
-
             }
 
             @Override
@@ -126,6 +123,4 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
-
-
 }

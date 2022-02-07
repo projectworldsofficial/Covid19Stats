@@ -1,5 +1,7 @@
 package com.halil.ozel.covid19stats.data;
 
+import java.util.Objects;
+
 public class CountryInfo {
 
 
@@ -41,5 +43,28 @@ public class CountryInfo {
 
     public void setIso3(String iso3) {
         this.iso3 = iso3;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CountryInfo)) return false;
+        CountryInfo that = (CountryInfo) o;
+        return getFlag().equals(that.getFlag()) && get_id().equals(that.get_id()) && getIso2().equals(that.getIso2()) && getIso3().equals(that.getIso3());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFlag(), get_id(), getIso2(), getIso3());
+    }
+
+    @Override
+    public String toString() {
+        return "CountryInfo{" +
+                "flag='" + flag + '\'' +
+                ", _id='" + _id + '\'' +
+                ", iso2='" + iso2 + '\'' +
+                ", iso3='" + iso3 + '\'' +
+                '}';
     }
 }

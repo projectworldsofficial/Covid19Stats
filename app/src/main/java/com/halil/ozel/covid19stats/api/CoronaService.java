@@ -14,12 +14,8 @@ public interface CoronaService {
     @GET("countries/?sort=country")
     Call<List<CountriesResponse>> getCountries();
 
-
     @GET("countries/{country}")
-    Call<CountriesResponse> getCountryInfo(
-
-            @Path("country") String country
-    );
+    Call<CountriesResponse> getCountryInfo(@Path("country") String country);
 
     @GET("all")
     Call<AllCountriesResponse> getAllCountries();

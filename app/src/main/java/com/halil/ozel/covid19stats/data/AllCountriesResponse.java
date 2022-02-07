@@ -1,5 +1,7 @@
 package com.halil.ozel.covid19stats.data;
 
+import java.util.Objects;
+
 public class AllCountriesResponse {
 
     private String continent;
@@ -140,5 +142,38 @@ public class AllCountriesResponse {
 
     public void setTodayDeaths(String todayDeaths) {
         this.todayDeaths = todayDeaths;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AllCountriesResponse)) return false;
+        AllCountriesResponse that = (AllCountriesResponse) o;
+        return getContinent().equals(that.getContinent()) && getCases().equals(that.getCases()) && getCritical().equals(that.getCritical()) && getActive().equals(that.getActive()) && getTestsPerOneMillion().equals(that.getTestsPerOneMillion()) && getAffectedCountries().equals(that.getAffectedCountries()) && getRecovered().equals(that.getRecovered()) && getTests().equals(that.getTests()) && getDeathsPerOneMillion().equals(that.getDeathsPerOneMillion()) && getCasesPerOneMillion().equals(that.getCasesPerOneMillion()) && getUpdated().equals(that.getUpdated()) && getDeaths().equals(that.getDeaths()) && getTodayCases().equals(that.getTodayCases()) && getTodayDeaths().equals(that.getTodayDeaths());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getContinent(), getCases(), getCritical(), getActive(), getTestsPerOneMillion(), getAffectedCountries(), getRecovered(), getTests(), getDeathsPerOneMillion(), getCasesPerOneMillion(), getUpdated(), getDeaths(), getTodayCases(), getTodayDeaths());
+    }
+
+    @Override
+    public String toString() {
+        return "AllCountriesResponse{" +
+                "continent='" + continent + '\'' +
+                ", cases='" + cases + '\'' +
+                ", critical='" + critical + '\'' +
+                ", active='" + active + '\'' +
+                ", testsPerOneMillion='" + testsPerOneMillion + '\'' +
+                ", affectedCountries='" + affectedCountries + '\'' +
+                ", recovered='" + recovered + '\'' +
+                ", tests='" + tests + '\'' +
+                ", deathsPerOneMillion='" + deathsPerOneMillion + '\'' +
+                ", casesPerOneMillion='" + casesPerOneMillion + '\'' +
+                ", updated='" + updated + '\'' +
+                ", deaths='" + deaths + '\'' +
+                ", todayCases='" + todayCases + '\'' +
+                ", todayDeaths='" + todayDeaths + '\'' +
+                '}';
     }
 }
