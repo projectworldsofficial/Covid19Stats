@@ -1,5 +1,7 @@
 package com.halil.ozel.covid19stats.data;
 
+import java.util.Objects;
+
 public class CountriesResponse {
 
     private String country;
@@ -110,5 +112,36 @@ public class CountriesResponse {
 
     public void setTests(String tests) {
         this.tests = tests;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CountriesResponse)) return false;
+        CountriesResponse that = (CountriesResponse) o;
+        return getTodayCases() == that.getTodayCases() && getTodayDeaths() == that.getTodayDeaths() && getCountry().equals(that.getCountry()) && getRecovered().equals(that.getRecovered()) && getCases().equals(that.getCases()) && getCritical().equals(that.getCritical()) && getDeathsPerOneMillion().equals(that.getDeathsPerOneMillion()) && getActive().equals(that.getActive()) && getCasesPerOneMillion().equals(that.getCasesPerOneMillion()) && getCountryInfo().equals(that.getCountryInfo()) && getDeaths().equals(that.getDeaths()) && getTests().equals(that.getTests());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCountry(), getRecovered(), getCases(), getCritical(), getDeathsPerOneMillion(), getActive(), getCasesPerOneMillion(), getCountryInfo(), getDeaths(), getTodayCases(), getTodayDeaths(), getTests());
+    }
+
+    @Override
+    public String toString() {
+        return "CountriesResponse{" +
+                "country='" + country + '\'' +
+                ", recovered='" + recovered + '\'' +
+                ", cases='" + cases + '\'' +
+                ", critical='" + critical + '\'' +
+                ", deathsPerOneMillion='" + deathsPerOneMillion + '\'' +
+                ", active='" + active + '\'' +
+                ", casesPerOneMillion='" + casesPerOneMillion + '\'' +
+                ", countryInfo=" + countryInfo +
+                ", deaths='" + deaths + '\'' +
+                ", todayCases=" + todayCases +
+                ", todayDeaths=" + todayDeaths +
+                ", tests='" + tests + '\'' +
+                '}';
     }
 }
